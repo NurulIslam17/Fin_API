@@ -10,7 +10,7 @@ Route::get('/health', function () {
     return response()->json([
         'status' => true,
         'message' => 'It is OK',
-    ]);
+    ], 200);
 });
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -19,4 +19,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::delete("/user/{id}", [AuthController::class, 'deleteById']);
 });
