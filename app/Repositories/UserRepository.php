@@ -6,9 +6,19 @@ use App\Models\User;
 
 class UserRepository
 {
-    public function findByEmail(string $email): ?User
+    public function getAl($params)
     {
-        return User::where('email', $email)->first();
+        $query = User::query();
+
+        if (isset($params['name']) && $params['name'] !== '') {
+            $query->where('name', 'like', '%' . $params['name'] . '%');
+        }
+
+        if (isset($params['email']) && $params['email'] !== '') {
+            $query->where('email', 'like', '%' . $params['email'] . '%');
+        }
+
+        return $query->paginate($params['per_page'] ?? 10);
     }
 
     public function create(array $data): User
@@ -19,5 +29,16 @@ class UserRepository
     public function findById(int $id): ?User
     {
         return User::find($id);
+    }
+
+    public function deleteBYId($id)
+    {
+        $user = User::find($id);
+
+        if (! $user) {
+            return false;
+        }
+
+        return $user->delete();
     }
 }

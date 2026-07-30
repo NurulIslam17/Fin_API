@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::delete("/user/{id}", [AuthController::class, 'deleteById']);
+    Route::get("/users", [UserController::class, "getAll"]);
+    Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 });
