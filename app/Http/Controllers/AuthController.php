@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AuthService;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -74,12 +72,4 @@ class AuthController extends Controller
         ]);
     }
 
-    public function deleteById($id)
-    {
-        authorizePermission('user.delete');
-        return response()->json([
-            'status' => true,
-            'message' => 'Deleted successfully.'
-        ]);
-    }
 }
