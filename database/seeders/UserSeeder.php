@@ -15,30 +15,39 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+            'name' => 'Super Admin',
+            'email' => 'superadmin@bank.com',
+            'password' => Hash::make('superadmin@bank.com'),
         ]);
+        // Assign  role
+        $admin->assignRole('SUPER_ADMIN');
 
+        $admin = User::create([
+            'name' => 'Bank Admin',
+            'branch_id' => 1,
+            'email' => 'bankadmin@bank.com',
+            'password' => Hash::make('bankadmin@bank.com'),
+        ]);
+        // Assign  role
+        $admin->assignRole('BANK_ADMIN');
+
+
+        $admin = User::create([
+            'name' => 'CSO1',
+            'branch_id' => 1,
+            'email' => 'cso1@bank.com',
+            'password' => Hash::make('cso1@bank.com'),
+        ]);
         // Assign Admin role
-        $admin->assignRole('Admin');
+        $admin->assignRole('CUSTOMER_SERVICE_OFFICER');
 
-        $manager = User::create([
-            'name' => 'Manager',
-            'email' => 'manager@example.com',
-            'password' => Hash::make('password'),
+        $admin = User::create([
+            'name' => 'CSO2',
+            'branch_id' => 2,
+            'email' => 'cso2@bank.com',
+            'password' => Hash::make('cso2@bank.com'),
         ]);
-
-        // Assign Manager role
-        $manager->assignRole('Manager');
-
-        $user = User::create([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        // Assign User role
-        $user->assignRole('User');
+        // Assign Admin role
+        $admin->assignRole('CUSTOMER_SERVICE_OFFICER');
     }
 }

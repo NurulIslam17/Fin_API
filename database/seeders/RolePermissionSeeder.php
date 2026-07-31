@@ -14,29 +14,23 @@ class RolePermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]
             ->forgetCachedPermissions();
 
-        Permission::create(['name' => 'user.create']);
-        Permission::create(['name' => 'user.view']);
-        Permission::create(['name' => 'user.update']);
-        Permission::create(['name' => 'user.delete']);
+        $superAdmin = Role::where('name', 'SUPER_ADMIN')->first();
+        $superAdmin->syncPermissions(Permission::all());
 
-        Permission::create(['name' => 'role.create']);
-        Permission::create(['name' => 'role.view']);
-        Permission::create(['name' => 'role.update']);
-        Permission::create(['name' => 'role.delete']);
-
-        $admin = Role::create(['name' => 'Admin']);
-        $manager = Role::create(['name' => 'Manager']);
-        $user = Role::create(['name' => 'User']);
-
-        $admin->givePermissionTo(Permission::all());
-
-        $manager->givePermissionTo([
+        $superAdmin = Role::where('name', 'BANK_ADMIN')->first();
+        $superAdmin->givePermissionTo([
             'user.view',
             'user.update'
         ]);
 
-        $user->givePermissionTo([
-            'user.view'
+        $cso = Role::where('name', 'CUSTOMER_SERVICE_OFFICER')->first();
+        $cso->givePermissionTo([
+            'customer.view',
+            'customer.create',
+            'customer.update',
+            'customer.delete',
+            'account.view',
+            'account.create',
         ]);
     }
 }
