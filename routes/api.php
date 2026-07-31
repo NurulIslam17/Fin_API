@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +15,7 @@ Route::get('/health', function () {
     ], 200);
 });
 
-Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -23,4 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get("/users", [UserController::class, "getAll"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
+
+    Route::post("/customer", [CustomerController::class, "addCustomer"]);
 });

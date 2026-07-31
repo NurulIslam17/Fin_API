@@ -21,7 +21,7 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'data' => $users,
-            'message' => 'User fetrched successfull'
+            'message' => 'User fetched successfull'
         ]);
     }
 

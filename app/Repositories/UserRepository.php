@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
@@ -19,6 +20,20 @@ class UserRepository
         }
 
         return $query->paginate($params['per_page'] ?? 10);
+    }
+
+
+    public function addUser($data)
+    {
+        $user = User::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'branch_id' => $data['branch_id'],
+            'password' => Hash::make($data['email']),
+        ]);
+        // Assign User role
+        $user->assignRole('CUSTOMER');
+        return $user;
     }
 
     public function create(array $data): User
