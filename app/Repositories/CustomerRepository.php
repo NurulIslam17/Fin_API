@@ -3,13 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Customer;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class CustomerRepository
 {
-
-
     public function addCustomer($data)
     {
         return Customer::firstOrCreate(

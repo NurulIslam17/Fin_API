@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
-
     private  $customerRepository;
     private $userService;
 
@@ -20,13 +19,10 @@ class CustomerService
 
     public function addCustomer($data)
     {
-
         return DB::transaction(function () use ($data) {
-
-
             $cso                = $this->userService->findById(auth()->id());
             $data['branch_id']  = $cso['branch_id'];
-            $data['name']       = $data['first_name'] . '' . $data['last_name'];
+            $data['name']       = $data['first_name'] . ' ' . $data['last_name'];
 
             $user               = $this->userService->addUser($data);
             $data['user_id']    = $user['id'];
