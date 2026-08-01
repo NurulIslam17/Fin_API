@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class, // Sync role permission
             BranchSeeder::class,
             UserSeeder::class,
+            AccountTypeSeeder::class,
         ]);
     }
 }
