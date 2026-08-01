@@ -26,4 +26,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 
     Route::post("/customer", [CustomerController::class, "addCustomer"]);
+    
 });
