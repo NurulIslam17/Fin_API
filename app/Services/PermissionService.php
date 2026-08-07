@@ -11,7 +11,7 @@ class PermissionService
 
     public function getPermissions()
     {
-        return Permission::latest()->get();
+        return Permission::latest()->paginate(10);
     }
 
     public function addPermissions($data)
