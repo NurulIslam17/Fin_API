@@ -43,7 +43,10 @@ class AuthService
         return [
             'status' => true,
             'message' => 'Login successful.',
-            'user' => $user,
+            'user' => [
+                ...$user->toArray(),
+                'roles' => $user->getRoleNames(),
+            ],
             'token' => $token,
         ];
     }
