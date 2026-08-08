@@ -53,10 +53,22 @@ class ConfigurationController extends Controller
     public function rolePermissionsSync(Request $request)
     {
         authorizePermission("permission.assign");
+        $this->permissionService->addPermissions($request->all());
         $this->permissionService->rolePermissionsSync($request->all());
         return response()->json([
             'status' => true,
             'message'   => "Role-Permissions sync successfuly!",
+        ]);
+    }
+
+    public function getRoleWisePermissions(Request $request)
+    {
+        authorizePermission("permission.view");
+        $permissions = $this->permissionService->getRoleWisePermissions($request->all());
+        return response()->json([
+            "data" => $permissions,
+            'status' => true,
+            'message'   => "Role wise permissions fetched successfuly!",
         ]);
     }
 }

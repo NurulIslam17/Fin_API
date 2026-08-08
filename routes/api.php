@@ -37,4 +37,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("configuration/permissions", [ConfigurationController::class, 'getPermissions']);
     Route::post("configuration/permissions", [ConfigurationController::class, 'addPermissions']);
     Route::post("configuration/permissions-sync", [ConfigurationController::class, 'rolePermissionsSync']);
+    Route::get("configuration/permissions-by-role", [ConfigurationController::class, 'getRoleWisePermissions']);
 });
