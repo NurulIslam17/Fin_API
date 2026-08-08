@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -26,7 +25,18 @@ class PermissionService
 
     public function rolePermissionsSync($data)
     {
-        $role = Role::where('name', $data['role'])->first();
-        $role->givePermissionTo($data['permissions']);
+        $role = Role::where('name', $data['role'])->firstOrFail();
+        // Remove all existing permissions
+        $role->syncPermissions($data['permissions']);
+        return $role;
+    }
+
+    public function getRoleWisePermissions($params)
+    {
+        $role = Role::where('name', $params['role'])
+            ->with('permissions')
+            ->firstOrFail();
+
+        return $role->permissions->pluck('name');
     }
 }

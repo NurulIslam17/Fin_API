@@ -35,6 +35,7 @@ class PermissionSeeder extends Seeder
             'permission.create',
             'permission.update',
             'permission.delete',
+            'permission.assign',
 
             // Branch Management
             'branch.view',
@@ -56,10 +57,10 @@ class PermissionSeeder extends Seeder
 
             // Transactions
             'transaction.view',
-            'transaction.deposit',
-            'transaction.withdraw',
-            'transaction.transfer',
-            'transaction.reverse',
+            'transaction.create',
+            'transaction.update',
+            'transaction.delete',
+            'transaction.reject',
 
             // Loan Management
             'loan.view',
@@ -70,7 +71,7 @@ class PermissionSeeder extends Seeder
 
             // Card Management
             'card.view',
-            'card.issue',
+            'card.create',
             'card.block',
             'card.replace',
 
@@ -92,6 +93,5 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'web',
             ]);
         }
-
     }
 }

@@ -46,6 +46,7 @@ class AuthService
             'user' => [
                 ...$user->toArray(),
                 'roles' => $user->getRoleNames(),
+                'permissions' => $user->getAllPermissions()->pluck('name')->values(),
             ],
             'token' => $token,
         ];
