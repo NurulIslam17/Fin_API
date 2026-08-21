@@ -26,6 +26,14 @@ class UserService
         return $this->userRepository->getAl($params);
     }
 
+
+    public function getAllOfficeUsers($params)
+    {
+        return $this->userRepository->getAllOfficeUsers($params);
+    }
+
+
+
     public function findById($id)
     {
         return $this->userRepository->findById($id);

@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get("/users", [UserController::class, "getAll"]);
+    Route::get("/office-users", [UserController::class, "getAllOfficeUsers"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 
     Route::post("/customer", [CustomerController::class, "addCustomer"]);
