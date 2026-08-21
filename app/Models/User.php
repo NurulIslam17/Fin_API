@@ -31,4 +31,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * User belongs to a branch.
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    /**
+     * User has one office-user profile.
+     */
+    public function officeUser()
+    {
+        return $this->hasOne(OfficeUser::class);
+    }
 }

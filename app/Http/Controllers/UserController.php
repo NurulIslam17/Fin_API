@@ -25,6 +25,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function getAllOfficeUsers(Request $request)
+    {
+        authorizePermission('user.view');
+        $officeUsers = $this->userService->getAllOfficeUsers($request->all());
+        return response()->json([
+            'status' => true,
+            'data' => $officeUsers,
+            'message' => 'All office user fetched successfull'
+        ]);
+    }
+
     public function deleteById($id)
     {
         authorizePermission('user.delete');

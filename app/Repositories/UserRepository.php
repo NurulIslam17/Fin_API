@@ -22,6 +22,26 @@ class UserRepository
         return $query->paginate($params['per_page'] ?? 10);
     }
 
+    public function getAllOfficeUsers($params)
+    {
+        $authUser = auth()->user();
+
+        $query = User::query()
+            ->with(['branch', 'roles', 'officeUser'])
+            ->whereHas('officeUser')
+            ->where('id', '!=', $authUser->id)
+            ->whereDoesntHave('roles', function ($q) {
+                $q->whereIn('name', ['SUPER_ADMIN', 'CUSTOMER']);
+            });
+
+        if ($authUser->hasRole('BANK_ADMIN')) {
+            $query->where('branch_id', $authUser->branch_id);
+        }
+
+        return $query->paginate($params['per_page'] ?? 10);
+    }
+
+
 
     public function addUser($data)
     {
