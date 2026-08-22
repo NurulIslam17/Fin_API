@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\OfficeUserService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     private $userService;
+    private $officeUserService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, OfficeUserService $officeUserService)
     {
         $this->userService = $userService;
+        $this->officeUserService = $officeUserService;
     }
 
     public function getAll(Request $request)
@@ -23,6 +27,28 @@ class UserController extends Controller
             'data' => $users,
             'message' => 'User fetched successfull'
         ]);
+    }
+
+    public function addOfficeUser(Request $request)
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                $user = $this->userService->addOfficeUser($request->all());
+                $data = $request->all();
+                $data['user_id'] = $user['id'];
+                $this->officeUserService->saveOfficeUser($data);
+            });
+            return response()->json([
+                'status' => true,
+                'message' => 'Office user added successfully.'
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to add office user.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function getAllOfficeUsers(Request $request)

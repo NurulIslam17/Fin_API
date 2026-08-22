@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserService
 {
@@ -26,13 +25,16 @@ class UserService
         return $this->userRepository->getAl($params);
     }
 
+    public function addOfficeUser($data)
+    {
+        return $this->userRepository->addUser($data);
+    
+    }
 
     public function getAllOfficeUsers($params)
     {
         return $this->userRepository->getAllOfficeUsers($params);
     }
-
-
 
     public function findById($id)
     {
