@@ -24,4 +24,11 @@ class Branch extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    // Scope Active BRanches
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'ACTIVE');
+    }
 }

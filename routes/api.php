@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get("/users", [UserController::class, "getAll"]);
+    Route::post("/user", [UserController::class, "addOfficeUser"]);
+    Route::post("/branches", [BranchController::class, 'add']);
     Route::get("/office-users", [UserController::class, "getAllOfficeUsers"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 
@@ -31,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get("account/types", [AccountController::class, 'getAccountTypes']);
 
+
+    Route::get("/branches", [BranchController::class, 'getAllBranch']);
 
     // Configuration
 
