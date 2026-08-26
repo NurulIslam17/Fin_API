@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ConfigurationController;
@@ -36,6 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get("/branches", [BranchController::class, 'getAllBranch']);
+
+    // Activiies
+    Route::get("activities/all", [ActivityLogController::class, 'getAll']);
 
     // Configuration
 
