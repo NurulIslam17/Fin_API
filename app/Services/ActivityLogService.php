@@ -3,10 +3,25 @@
 namespace App\Services;
 
 use App\Models\ActivityLog;
+use App\Repositories\ActivityLogRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class ActivityLogService
 {
+
+    private $activityLogRepository;
+
+    public function __construct(ActivityLogRepository $activityLogRepository)
+    {
+        $this->activityLogRepository = $activityLogRepository;
+    }
+
+
+    public function getAll($params)
+    {
+        return $this->activityLogRepository->getAll($params);
+    }
+
     public function log(
         string $module,
         string $action,
