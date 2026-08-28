@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get("/users", [UserController::class, "getAll"]);
     Route::post("/user", [UserController::class, "addOfficeUser"]);
+    Route::delete("/user/{id}", [UserController::class, "deleteOfficeUserById"]);
     Route::post("/branches", [BranchController::class, 'add']);
     Route::get("/office-users", [UserController::class, "getAllOfficeUsers"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);

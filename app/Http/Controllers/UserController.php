@@ -40,7 +40,7 @@ class UserController extends Controller
             });
             return response()->json([
                 'status' => true,
-                'message' => 'Office user added successfully.'
+                'message' => 'Office user added successfuly.'
             ]);
         } catch (\Throwable $e) {
             return response()->json([
@@ -49,6 +49,16 @@ class UserController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function deleteOfficeUserById($id)
+    {
+        authorizePermission('user.delete');
+        $this->userService->deleteOfficeUserById($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Office user removed successfuly'
+        ]);
     }
 
     public function getAllOfficeUsers(Request $request)

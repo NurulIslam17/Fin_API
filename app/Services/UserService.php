@@ -28,7 +28,11 @@ class UserService
     public function addOfficeUser($data)
     {
         return $this->userRepository->addUser($data);
-    
+    }
+
+    public function deleteOfficeUserById($id)
+    {
+        return $this->userRepository->deleteById($id);
     }
 
     public function getAllOfficeUsers($params)

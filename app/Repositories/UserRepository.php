@@ -97,14 +97,12 @@ class UserRepository
         return User::find($id);
     }
 
-    public function deleteBYId($id)
+    public function deleteById($id)
     {
         $user = User::find($id);
-
         if (! $user) {
             return false;
         }
-
         return $user->delete();
     }
 }
