@@ -72,6 +72,18 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function officeUserById($id)
+    {
+        authorizePermission('user.view');
+        $officeUser = $this->userService->findById($id);
+        return response()->json([
+            'status' => true,
+            'data' => $officeUser,
+            'message' => 'Office user fetched successfull'
+        ]);
+    }
+
     public function deleteById($id)
     {
         authorizePermission('user.delete');
