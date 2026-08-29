@@ -94,7 +94,7 @@ class UserRepository
 
     public function findById(int $id): ?User
     {
-        return User::find($id);
+        return User::with('officeUser')->find($id);
     }
 
     public function deleteById($id)

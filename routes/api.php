@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete("/user/{id}", [UserController::class, "deleteOfficeUserById"]);
     Route::post("/branches", [BranchController::class, 'add']);
     Route::get("/office-users", [UserController::class, "getAllOfficeUsers"]);
+    Route::get("/office-users/{id}", [UserController::class, "officeUserById"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 
     Route::post("/customer", [CustomerController::class, "addCustomer"]);
