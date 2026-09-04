@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use App\Models\OfficeUser;
 
 if (! function_exists('authorizePermission')) {
@@ -26,6 +27,35 @@ if (!function_exists('generateEmployeeId')) {
         return 'EMP-' . date('Y') . '-' . str_pad(
             $nextNumber,
             5,
+            '0',
+            STR_PAD_LEFT
+        );
+    }
+}
+
+
+if (!function_exists('generateCustomerId')) {
+    function generateCustomerId(): string
+    {
+        $year = now()->format('y');
+        $month = now()->format('m');
+
+        $prefix = "CUS-{$month}{$year}";
+
+        $lastCustomer = Customer::where('customer_no', 'like', "{$prefix}%")
+            ->orderByDesc('id')
+            ->first();
+
+        if ($lastCustomer) {
+            $lastNumber = (int) substr($lastCustomer->customer_no, -8);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            $nextNumber = 1;
+        }
+
+        return $prefix . str_pad(
+            $nextNumber,
+            8,
             '0',
             STR_PAD_LEFT
         );

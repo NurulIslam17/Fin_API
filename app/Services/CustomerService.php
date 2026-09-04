@@ -17,16 +17,17 @@ class CustomerService
         $this->userService = $userService;
     }
 
+    public function allCustomer($params)
+    {
+        return $this->customerRepository->allCustomer($params);
+    }
+
+
     public function addCustomer($data)
     {
         return DB::transaction(function () use ($data) {
             $cso                = $this->userService->findById(auth()->id());
             $data['branch_id']  = $cso['branch_id'];
-            $data['name']       = $data['first_name'] . ' ' . $data['last_name'];
-
-            $user               = $this->userService->addUser($data);
-            $data['user_id']    = $user['id'];
-
             return $this->customerRepository->addCustomer($data);
         });
     }

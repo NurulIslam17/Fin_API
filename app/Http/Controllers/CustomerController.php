@@ -15,6 +15,18 @@ class CustomerController extends Controller
         $this->customerService = $customerService;
     }
 
+
+    public function allCustomer(Request $request)
+    {
+        authorizePermission("customer.view");
+        $customers = $this->customerService->allCustomer($request->all());
+        return response()->json([
+            "data" => $customers,
+            'status' => true,
+            'message' => 'All customer fetched successfully!'
+        ]);
+    }
+
     public function addCustomer(Request $request)
     {
         authorizePermission("customer.create");
