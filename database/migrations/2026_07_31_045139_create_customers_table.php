@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             // Authentication User
-            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->unique()->constrained()->cascadeOnDelete();
             // Branch
             $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             // Customer Information

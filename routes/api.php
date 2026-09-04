@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/office-users/{id}", [UserController::class, "officeUserById"]);
     Route::delete("/user/{id}", [UserController::class, 'deleteById']);
 
+    Route::get("/customer", [CustomerController::class, "allCustomer"]);
     Route::post("/customer", [CustomerController::class, "addCustomer"]);
 
     Route::get("account/types", [AccountController::class, 'getAccountTypes']);
